@@ -21,7 +21,9 @@ RUN npm ci
 
 COPY . .
 RUN npm run build && rm -rf node_modules \
-    && composer dump-autoload --optimize --no-dev
+    && composer dump-autoload --optimize --no-dev \
+    && mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
+    && chmod -R 777 storage bootstrap/cache
 
 RUN chmod +x docker/start.sh
 
